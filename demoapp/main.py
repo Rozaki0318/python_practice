@@ -1,4 +1,5 @@
 import csv
+from genericpath import exists
 
 class Roboko(object):
     def __init__(self, name):
@@ -9,10 +10,13 @@ class Roboko(object):
         word = "Hello! May I ask your name?\n"
         print('=' * len(word) + '\n' + word + '=' * len(word) + '\n')
         ans = input()
+        if not ans:
+            return self.ask_name()
         return ans
     
     def ask_restaurant(self, username):
-        print('===========================\n{}-san, Which restaurant do you like?\n==========================='.format(username))
+        word = "{}-san, Which restaurant do you like?\n".format(username)
+        print('=' * len(word) + '\n' + word + '=' * len(word) + '\n')
         return input()
 
 
