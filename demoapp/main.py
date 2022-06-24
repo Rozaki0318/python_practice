@@ -1,6 +1,7 @@
 import csv
 from pathlib import Path
 
+
 class Roboko(object):
     def __init__(self, name):
         self.name = name
@@ -8,7 +9,7 @@ class Roboko(object):
         path = Path('./restaurant_list.csv')
         if not path.is_file():
             with open('restaurant_list.csv', 'w') as csv_file:
-                fieldnames = ['Name','Count']
+                fieldnames = ['Name', 'Count']
                 writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
                 writer.writeheader()
         else:
@@ -32,7 +33,8 @@ class Roboko(object):
             list = [[user_recommend, 1]]
             self.file_write(list)
         elif len(list) == 1:
-            print('{}-san, my recommendation is {}. Do you like that? yes or no'.format(username, list[0][0]))
+            print('{}-san, my recommendation is {}. \
+                Do you like that? yes or no'.format(username, list[0][0]))
             ans = input().capitalize()
             if ans == 'Yes':
                 list[0][1] = list[0][1] + 1
@@ -53,7 +55,7 @@ class Roboko(object):
                 self.file_write(list)
         else:
             max_value = 0
-            for i in 0,len(list)-2:
+            for i in 0, len(list)-2:
                 print(i)
                 if list[i][1] > list[i+1][1]:
                     max_value = list[i][1]
@@ -64,12 +66,14 @@ class Roboko(object):
             for f in list:
                 if max_value == f[1]:
                     recommend_restaurant = f[0]
-            print('{}-san, my recommendation is {}. Do you like that? yes or no'.format(username, recommend_restaurant))
+            print('{}-san, my recommendation is {}. \
+                Do you like that? \
+                yes or no'.format(username, recommend_restaurant))
             ans = input().capitalize()
             if ans == 'Yes':
                 for f in list:
-                  if recommend_restaurant == f[0]:
-                    f[1] = f[1] + 1
+                    if recommend_restaurant == f[0]:
+                        f[1] = f[1] + 1
                 self.file_write(list)
             else:
                 print('{}-san, which restaurant do you like?'.format(username))
@@ -85,7 +89,6 @@ class Roboko(object):
                     if flag == 0:
                         list.append([user_recommend, 1])
                 self.file_write(list)
-        
 
     def file_read(self):
         with open('restaurant_list.csv', 'r') as csv_file:
@@ -95,12 +98,11 @@ class Roboko(object):
                 list.append([row['Name'], int(row['Count'])])
         return list
 
-
     def file_write(self, list):
         with open('./restaurant_list.csv', 'r+') as csv_file:
             csv_file.truncate(0)
         with open('./restaurant_list.csv', 'w') as csv_file:
-            fieldnames = ['Name','Count']
+            fieldnames = ['Name', 'Count']
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             writer.writeheader()
             for row in list:
@@ -108,6 +110,7 @@ class Roboko(object):
 
     def say_goodbye(self):
         print('Thanks! Good bye!')
+
 
 roboko = Roboko('Hanako')
 print(roboko.list)
