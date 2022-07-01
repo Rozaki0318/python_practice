@@ -1,3 +1,8 @@
 Account,Type,Amount,Date
-S,e,i,yet
-D,e,p,yet
+Parents,Deposit,100000,2022-07-02
+Parents,Deposit,100000,2022-07-02
+Parents,Deposit,100000,2022-07-02
+Parents,Deposit,100000,2022-07-02
+Parents,Deposit,100000,2022-07-02
+Parents,Withdraw,100000000000000000000000000,2022-07-02
+Seiya,Deposit,100000000000000000000000000000000000000,2022-07-02

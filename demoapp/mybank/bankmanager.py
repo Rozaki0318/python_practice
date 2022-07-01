@@ -1,8 +1,6 @@
 import csv
-from datetime import datetime
-from distutils.file_util import copy_file
+from datetime import date
 from pathlib import Path
-from sqlite3 import Date
 
 class bankManager(object):
     def __init__(self):
@@ -14,6 +12,7 @@ class bankManager(object):
                 writer.writeheader()
         else:
             self.accountactivity = self.file_read()
+            print(self.accountactivity)
     
     def ask_account(self):
         print('Which account? 1:Parents, 2:Seiya, 3:Kokone')
@@ -63,18 +62,19 @@ class bankManager(object):
             reader = csv.DictReader(csv_file)
             list = []
             for row in reader:
-                list.append([row['Account'], row['Type'], int(row['Amount']), datetime(row[Date])])
+                list.append([row['Account'], row['Type'], int(row['Amount']), row['Date']])
         return list
 
     def file_write(self, list):
+        self.accountactivity.append(list)
         with open('./accountactivity.csv', 'r+') as csv_file:
             csv_file.truncate(0)
         with open('./accountactivity.csv', 'w') as csv_file:
             fieldnames = ['Account','Type','Amount','Date']
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             writer.writeheader()
-            for row in list:
-                writer.writerow({'Account': row[0], 'Type': row[1], 'Amount': row[2], 'Date': 'yet'})
+            for row in self.accountactivity:
+                writer.writerow({'Account': row[0], 'Type': row[1], 'Amount': row[2], 'Date': date.today()})
 
     def say_goodbye(self):
         print('Thanks! Good bye!')    
