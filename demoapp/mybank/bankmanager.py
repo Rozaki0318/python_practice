@@ -2,12 +2,13 @@ import csv
 from datetime import date
 from pathlib import Path
 
+
 class bankManager(object):
     def __init__(self):
         path = Path('./accountactivity.csv')
         if not path.is_file():
             with open('accountactivity.csv', 'w') as csv_file:
-                fieldnames = ['Account','Type','Amount','Date']
+                fieldnames = ['Account', 'Type', 'Amount', s'Date']
                 writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
                 writer.writeheader()
                 self.accountactivity = []
@@ -31,8 +32,8 @@ class bankManager(object):
                 total_deposit += int(row[2])
             elif row[0] == account and row[1] == 'Withdraw':
                 total_deposit -= int(row[2])
-        print("{}'S DEPOSIT:{}".format(account,total_deposit))
-    
+        print("{}'S DEPOSIT:{}".format(account, total_deposit))
+
     def ask_account(self):
         print('Which account? 1:Parents, 2:Seiya, 3:Kokone')
         account = input()
@@ -45,7 +46,7 @@ class bankManager(object):
         elif account == '3':
             account = 'Kokone'
         return account
-         
+
     def ask_activity(self):
         print('Which activity? 1:Deposit, 2:Withdraw')
         activity = input()
@@ -56,7 +57,7 @@ class bankManager(object):
         elif activity == '2':
             activity = 'Withdraw'
         return activity
-    
+
     def ask_amount(self):
         print('How much?')
         money = int(input())
@@ -81,18 +82,25 @@ class bankManager(object):
             reader = csv.DictReader(csv_file)
             list = []
             for row in reader:
-                list.append([row['Account'], row['Type'], int(row['Amount']), row['Date']])
+                list.append([row['Account'],
+                            row['Type'],
+                            int(row['Amount']),
+                            row['Date']])
         return list
 
     def file_write(self, list):
         self.accountactivity.append(list)
         with open('./accountactivity.csv', 'a') as csv_file:
-            fieldnames = ['Account','Type','Amount','Date']
+            fieldnames = ['Account', 'Type', 'Amount', 'Date']
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-            writer.writerow({'Account': list[0], 'Type': list[1], 'Amount': list[2], 'Date': date.today()})
+            writer.writerow({'Account': list[0],
+                            'Type': list[1],
+                             'Amount': list[2],
+                             'Date': date.today()})
 
     def say_goodbye(self):
-        print('Thanks! Good bye!')    
+        print('Thanks! Good bye!')
+
 
 if __name__ == '__main__':
     mymanager = bankManager()
@@ -113,9 +121,3 @@ if __name__ == '__main__':
             elif confirmation == '2':
                 mymanager.say_goodbye()
             continue
-
-
-
-
-
-
