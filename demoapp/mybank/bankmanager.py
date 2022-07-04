@@ -8,7 +8,7 @@ class bankManager(object):
         path = Path('./accountactivity.csv')
         if not path.is_file():
             with open('accountactivity.csv', 'w') as csv_file:
-                fieldnames = ['Account', 'Type', 'Amount', s'Date']
+                fieldnames = ['Account', 'Type', 'Amount', 'Date']
                 writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
                 writer.writeheader()
                 self.accountactivity = []
@@ -32,7 +32,7 @@ class bankManager(object):
                 total_deposit += int(row[2])
             elif row[0] == account and row[1] == 'Withdraw':
                 total_deposit -= int(row[2])
-        print("{}'S DEPOSIT:{}".format(account, total_deposit))
+        print("{}'s Deposit:{}".format(account, total_deposit))
 
     def ask_account(self):
         print('Which account? 1:Parents, 2:Seiya, 3:Kokone')
