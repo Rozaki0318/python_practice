@@ -35,6 +35,11 @@ b = [3, 1, 7, 2, 2, 8, 10, 5, 9, 6, 4]
 b.sort()
 print(b)
 
+# count
+c = ['apple', 'grape', 'orange', 'apple', 'apple', 'grape', 'apple', 'apple']
+print("Apple: {}".format(c.count('apple')))
+print("Grape: {}".format(c.count('grape')))
+
 # List comprehenshion
 # [expression for variable in sequence if condition]
 print([x*2 for x in a if x % 2 == 1])
