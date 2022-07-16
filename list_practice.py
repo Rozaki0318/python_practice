@@ -43,3 +43,14 @@ print("Grape: {}".format(c.count('grape')))
 # List comprehenshion
 # [expression for variable in sequence if condition]
 print([x*2 for x in a if x % 2 == 1])
+
+# try remove if the value exists in the dictionary
+d = ['a', 'b', 'c']
+e = ['a', 'b', 'c', 'd', 'e']
+try:
+  d.remove('c')
+  e.remove('f')
+except:
+  pass
+print("d is {}".format(d))
+print("e is {}".format(e))

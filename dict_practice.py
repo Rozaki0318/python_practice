@@ -45,3 +45,12 @@ print(x)
 # Removes all the items of the dictionary
 x.clear()
 print(x)
+
+# try remove if the value exists in the dictionary
+c = {'key1':'c', 'key2':'cc', 'key3':'ccc'}
+try:
+  c.remove('c')
+except:
+  pass
+print(c)
+
