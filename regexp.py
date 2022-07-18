@@ -41,7 +41,8 @@ print(re.search(r"Py.*n", "Python Programming"))
 print(re.search(r"Py[a-z]*n", "Python Programming"))
 
 # find IP address
-print("IP address: {}".format(re.search(r"[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+", "172a.16.10.10")))
+print("IP address: {}".format(re.search(r"[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+", "172.16.10.10")))
+print("IP address: {}".format(re.search(r"\d+\.\d+\.\d+\.\d+", "172.16.10.10")))
 #print("IP address: {}".format(re.search(r"[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*", "172.16.10.10")))
 #print("IP address: {}".format(re.search(r"[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*", "172a.16.10.10")))
 
@@ -53,3 +54,8 @@ print(re.search(r"o+zl+", "wooooooozzzlllllly"))
 
 print(re.search(r"p?each", "To each their own"))
 print(re.search(r"p?each", "I like peachs"))
+
+print(re.search(r"\w*", "This is another"))
+print(re.search(r"\w*", "This_is_another"))
+print(re.search(r"\d+", "This_is_another_123"))
+print(re.search(r"\s+", "This is another 123"))
