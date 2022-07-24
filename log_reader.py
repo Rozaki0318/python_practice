@@ -19,3 +19,38 @@ with open('syslog.log') as file:
 sort_err_dict = dict(sorted(err_dict.items(), key=operator.itemgetter(1), reverse=True))
 
 print(sort_err_dict)
+
+#The user usage statistics for the service 
+with open('syslog.log') as file:
+    for line in file:
+        line = line.strip()
+        user_line = re.search(r"\(([.\s\w]*)\)$", line)
+        if user_line:
+            if user_line.group(1) in user_dict:
+                if re.search(r"INFO", line):
+                    user_dict[user_line.group(1)]['INFO'] += 1
+                elif re.search(r"ERROR", line):
+                    user_dict[user_line.group(1)]['ERROR'] += 1
+            else:
+                if re.search(r"INFO", line):
+                    user_dict[user_line.group(1)] = {'INFO':1, 'ERROR':0}
+                elif re.search(r"ERROR", line):
+                    user_dict[user_line.group(1)] = {'INFO':0, 'ERROR':1}
+
+sort_user_dict = dict(sorted(user_dict.items(), key=operator.itemgetter(0)))
+
+print(sort_user_dict)
+
+with open('err_rank.csv', 'w') as csv_errfile:
+    fieldsnames = ["Error", "Count"]
+    writer = csv.DictWriter(csv_errfile, fieldnames=fieldsnames)
+    writer.writeheader()
+    for key in sort_err_dict:
+        writer.writerow({"Error": key, "Count": sort_err_dict[key]})
+
+with open('user_rank.csv', 'w') as csv_userfile:
+    fieldsnames = ["User", "INFO", "ERROR"]
+    writer = csv.DictWriter(csv_userfile, fieldnames=fieldsnames)
+    writer.writeheader()
+    for key in sort_user_dict:
+        writer.writerow({"User": key, "INFO": sort_user_dict[key]["INFO"], "ERROR": sort_user_dict[key]["ERROR"]})
